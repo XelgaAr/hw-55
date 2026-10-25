@@ -1,0 +1,86 @@
+
+> nodejs-hw02-tests@1.0.0 test:logic
+> node --test tests/*.test.mjs
+
+TAP version 13
+# Subtest: write creates a real UTF-8 file and logs success
+ok 1 - write creates a real UTF-8 file and logs success
+  ---
+  duration_ms: 7.386868
+  type: 'test'
+  ...
+# Subtest: write overwrites a previous file
+ok 2 - write overwrites a previous file
+  ---
+  duration_ms: 3.091698
+  type: 'test'
+  ...
+# Subtest: write supports empty data and buffers
+ok 3 - write supports empty data and buffers
+  ---
+  duration_ms: 2.269579
+  type: 'test'
+  ...
+# Subtest: write failure returns the same logged Error
+ok 4 - write failure returns the same logged Error
+  ---
+  duration_ms: 2.201246
+  type: 'test'
+  ...
+# Subtest: read returns real contents and logs them
+ok 5 - read returns real contents and logs them
+  ---
+  duration_ms: 2.314447
+  type: 'test'
+  ...
+# Subtest: read distinguishes empty file from failure
+ok 6 - read distinguishes empty file from failure
+  ---
+  duration_ms: 2.036888
+  type: 'test'
+  ...
+# Subtest: read handles a missing file with null and a dedicated message
+ok 7 - read handles a missing file with null and a dedicated message
+  ---
+  duration_ms: 1.000047
+  type: 'test'
+  ...
+# Subtest: read handles invalid path argument as a general error
+ok 8 - read handles invalid path argument as a general error
+  ---
+  duration_ms: 0.304199
+  type: 'test'
+  ...
+# Subtest: delete unlinks a real file
+ok 9 - delete unlinks a real file
+  ---
+  duration_ms: 1.814453
+  type: 'test'
+  ...
+# Subtest: delete reports a missing file without throwing
+ok 10 - delete reports a missing file without throwing
+  ---
+  duration_ms: 1.053377
+  type: 'test'
+  ...
+# Subtest: delete handles invalid path argument as a general error
+ok 11 - delete handles invalid path argument as a general error
+  ---
+  duration_ms: 0.280232
+  type: 'test'
+  ...
+# Subtest: independent files can be processed concurrently
+ok 12 - independent files can be processed concurrently
+  ---
+  duration_ms: 5.827949
+  type: 'test'
+  ...
+1..12
+# tests 12
+# suites 0
+# pass 12
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 79.351753

@@ -1,0 +1,5 @@
+
+> nodejs-hw02-tests@1.0.0 build
+> node scripts/build.mjs
+
+Built dist/ using v22.16.0. Captured 4 real console entries.

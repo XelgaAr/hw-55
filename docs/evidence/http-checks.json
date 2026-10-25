@@ -1,0 +1,136 @@
+[
+  {
+    "homework": 55,
+    "base": "/",
+    "checks": [
+      {
+        "path": "/index.html",
+        "method": "GET",
+        "status": 200,
+        "mime": "text/html; charset=utf-8"
+      },
+      {
+        "path": "/style.css",
+        "method": "GET",
+        "status": 200,
+        "mime": "text/css; charset=utf-8"
+      },
+      {
+        "path": "/app.js",
+        "method": "GET",
+        "status": 200,
+        "mime": "text/javascript; charset=utf-8"
+      },
+      {
+        "path": "/demo.json",
+        "method": "GET",
+        "status": 200,
+        "mime": "application/json; charset=utf-8"
+      },
+      {
+        "path": "/.nojekyll",
+        "method": "GET",
+        "status": 200,
+        "mime": "application/octet-stream"
+      },
+      {
+        "path": "/index.html",
+        "method": "HEAD",
+        "status": 200
+      },
+      {
+        "path": "/missing.txt",
+        "method": "GET",
+        "status": 404
+      },
+      {
+        "path": "/app.js",
+        "method": "POST",
+        "status": 405
+      },
+      {
+        "path": "/..%2f..%2fpackage.json",
+        "method": "GET",
+        "status": 403
+      },
+      {
+        "path": "/%ZZ",
+        "method": "GET",
+        "status": 400
+      }
+    ],
+    "passed": 10
+  },
+  {
+    "homework": 55,
+    "base": "/repository-check/",
+    "checks": [
+      {
+        "path": "/repository-check/index.html",
+        "method": "GET",
+        "status": 200,
+        "mime": "text/html; charset=utf-8"
+      },
+      {
+        "path": "/repository-check/style.css",
+        "method": "GET",
+        "status": 200,
+        "mime": "text/css; charset=utf-8"
+      },
+      {
+        "path": "/repository-check/app.js",
+        "method": "GET",
+        "status": 200,
+        "mime": "text/javascript; charset=utf-8"
+      },
+      {
+        "path": "/repository-check/demo.json",
+        "method": "GET",
+        "status": 200,
+        "mime": "application/json; charset=utf-8"
+      },
+      {
+        "path": "/repository-check/.nojekyll",
+        "method": "GET",
+        "status": 200,
+        "mime": "application/octet-stream"
+      },
+      {
+        "path": "/repository-check/index.html",
+        "method": "HEAD",
+        "status": 200
+      },
+      {
+        "path": "/repository-check/missing.txt",
+        "method": "GET",
+        "status": 404
+      },
+      {
+        "path": "/repository-check/app.js",
+        "method": "POST",
+        "status": 405
+      },
+      {
+        "path": "/repository-check/..%2f..%2fpackage.json",
+        "method": "GET",
+        "status": 403
+      },
+      {
+        "path": "/repository-check/%ZZ",
+        "method": "GET",
+        "status": 400
+      },
+      {
+        "path": "/repository-check",
+        "method": "GET",
+        "status": 308
+      },
+      {
+        "path": "/",
+        "method": "GET",
+        "status": 404
+      }
+    ],
+    "passed": 12
+  }
+]

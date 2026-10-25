@@ -1,0 +1,26 @@
+{
+  "name": "nodejs-hw02-tests",
+  "version": "1.0.0",
+  "main": "src/main.js",
+  "license": "MIT",
+  "devDependencies": {
+    "vitest": "^5.0.5"
+  },
+  "dependencies": {},
+  "scripts": {
+    "start": "node scripts/demo.mjs",
+    "demo": "node scripts/demo.mjs",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:logic": "node --test tests/*.test.mjs",
+    "build": "node scripts/build.mjs",
+    "dev": "node scripts/build.mjs && node scripts/serve.mjs",
+    "preview": "node scripts/serve.mjs",
+    "check": "npm run test:logic && npm test && npm run build"
+  },
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=24.0.0"
+  }
+}

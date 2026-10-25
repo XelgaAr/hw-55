@@ -1,0 +1,20 @@
+import { test, beforeEach } from 'node:test'
+import assert from 'node:assert/strict'
+import { mkdtemp, readFile, writeFile, rm, access } from 'node:fs/promises'
+import { tmpdir } from 'node:os'
+import { join } from 'node:path'
+import { writeFileAsync, readFileAsync, deleteFileAsync } from '../src/main.js'
+beforeEach(context => { context.mock.method(console, 'log', () => {}); context.mock.method(console, 'error', () => {}) })
+const directory = async context => { const path = await mkdtemp(join(tmpdir(), 'hw55-test-')); context.after(() => rm(path, { recursive: true, force: true })); return path }
+test('write creates a real UTF-8 file and logs success', async context => { const file = join(await directory(context), 'data.txt'); assert.equal(await writeFileAsync(file, 'Привіт 🌍'), undefined); assert.equal(await readFile(file, 'utf8'), 'Привіт 🌍'); assert.deepEqual(console.log.mock.calls[0].arguments, ['Файл успішно записано']) })
+test('write overwrites a previous file', async context => { const file = join(await directory(context), 'data.txt'); await writeFile(file, 'old'); await writeFileAsync(file, 'new'); assert.equal(await readFile(file, 'utf8'), 'new') })
+test('write supports empty data and buffers', async context => { const file = join(await directory(context), 'data.txt'); await writeFileAsync(file, ''); assert.equal(await readFile(file, 'utf8'), ''); await writeFileAsync(file, Buffer.from('bytes')); assert.equal(await readFile(file, 'utf8'), 'bytes') })
+test('write failure returns the same logged Error', async context => { const file = join(await directory(context), 'missing', 'data.txt'); const error = await writeFileAsync(file, 'value'); assert.ok(error instanceof Error); assert.equal(error.code, 'ENOENT'); assert.equal(console.error.mock.calls[0].arguments[1], error) })
+test('read returns real contents and logs them', async context => { const file = join(await directory(context), 'data.txt'); await writeFile(file, 'hello'); assert.equal(await readFileAsync(file), 'hello'); assert.deepEqual(console.log.mock.calls[0].arguments, ['Файл успішно прочитано:', 'hello']) })
+test('read distinguishes empty file from failure', async context => { const file = join(await directory(context), 'empty.txt'); await writeFile(file, ''); assert.equal(await readFileAsync(file), '') })
+test('read handles a missing file with null and a dedicated message', async context => { const file = join(await directory(context), 'missing.txt'); assert.equal(await readFileAsync(file), null); assert.deepEqual(console.error.mock.calls[0].arguments, ['Файл не існує:', file]) })
+test('read handles invalid path argument as a general error', async () => { assert.equal(await readFileAsync(null), null); assert.equal(console.error.mock.calls[0].arguments[0], 'Помилка при читанні файлу:') })
+test('delete unlinks a real file', async context => { const file = join(await directory(context), 'data.txt'); await writeFile(file, 'hello'); assert.equal(await deleteFileAsync(file), undefined); await assert.rejects(access(file), { code: 'ENOENT' }); assert.deepEqual(console.log.mock.calls[0].arguments, ['Файл успішно видалено']) })
+test('delete reports a missing file without throwing', async context => { const file = join(await directory(context), 'missing.txt'); const error = await deleteFileAsync(file); assert.equal(error.code, 'ENOENT'); assert.deepEqual(console.error.mock.calls[0].arguments, ['Файл не існує:', file]) })
+test('delete handles invalid path argument as a general error', async () => { const error = await deleteFileAsync(null); assert.ok(error instanceof Error); assert.equal(console.error.mock.calls[0].arguments[0], 'Помилка при видаленні файлу:') })
+test('independent files can be processed concurrently', async context => { const root = await directory(context); const files = Array.from({ length: 12 }, (_, i) => join(root, `${i}.txt`)); assert.ok((await Promise.all(files.map((file, i) => writeFileAsync(file, String(i))))).every(value => value === undefined)); assert.deepEqual(await Promise.all(files.map(readFileAsync)), files.map((_, i) => String(i))); await Promise.all(files.map(deleteFileAsync)) })

@@ -1,0 +1,28 @@
+{
+  "generatedAt": "2026-10-25T09:06:04.862Z",
+  "node": "v22.16.0",
+  "result": {
+    "file": "example.txt",
+    "content": "Привіт, це тестовий файл! ✓",
+    "deleted": true,
+    "missing": null
+  },
+  "logs": [
+    {
+      "level": "log",
+      "text": "Файл успішно записано"
+    },
+    {
+      "level": "log",
+      "text": "Файл успішно прочитано: Привіт, це тестовий файл! ✓"
+    },
+    {
+      "level": "log",
+      "text": "Файл успішно видалено"
+    },
+    {
+      "level": "error",
+      "text": "Файл не існує: /tmp/hw55-build-XDDt6l/example.txt"
+    }
+  ]
+}
